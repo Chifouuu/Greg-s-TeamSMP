@@ -9,4 +9,6 @@
 </p>
 
 # Greg-s-TeamSMP
+
+##📜 Description
 A Spigot(Paper) Team plugin for Minecraft SMP's. Including teams, claims, dynmap
