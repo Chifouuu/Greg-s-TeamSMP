@@ -26,4 +26,8 @@ public final class GregsTeamSMP extends JavaPlugin {
     public static GregsTeamSMP getInstance() {
         return instance;
     }
+
+    public TeamSerializationManager getTeamSerializationManager() {
+        return teamSerializationManager;
+    }
 }
