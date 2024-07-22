@@ -1,0 +1,4 @@
+name: Gregs TeamSMP
+version: '${version}'
+main: fr.gregwl.gregsteamsmp.GregsTeamSMP
+api-version: '1.21'
