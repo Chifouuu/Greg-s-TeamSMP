@@ -1,7 +1,6 @@
 package fr.gregwl.gregsteamsmp;
 
-import fr.gregwl.gregsteamsmp.command.team.TeamCommand;
-import fr.gregwl.gregsteamsmp.command.team.TeamTabCompletation;
+import fr.gregwl.gregsteamsmp.commands.TeamCommand;
 import fr.gregwl.gregsteamsmp.files.TeamSerializationManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -17,7 +16,6 @@ public final class GregsTeamSMP extends JavaPlugin {
         this.teamSerializationManager = new TeamSerializationManager();
 
         getCommand("team").setExecutor(new TeamCommand());
-        getCommand("team").setTabCompleter(new TeamTabCompletation());
     }
 
     @Override
