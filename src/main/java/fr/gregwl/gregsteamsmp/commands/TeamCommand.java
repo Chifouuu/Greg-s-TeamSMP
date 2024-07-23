@@ -3,6 +3,7 @@ package fr.gregwl.gregsteamsmp.commands;
 import fr.gregwl.gregsteamsmp.GregsTeamSMP;
 import fr.gregwl.gregsteamsmp.commands.teamsub.TeamCreate;
 import fr.gregwl.gregsteamsmp.commands.teamsub.TeamDisband;
+import fr.gregwl.gregsteamsmp.commands.teamsub.TeamInfo;
 import org.bukkit.command.*;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
@@ -18,6 +19,7 @@ public class TeamCommand implements TabExecutor {
     public TeamCommand() {
         subCommands.add(new TeamCreate());
         subCommands.add(new TeamDisband());
+        subCommands.add(new TeamInfo());
 
         //pour rajouter des sous-commande de la commande "team", juste ajouter une ligne comme ci-dessus, puis
         //faire la class

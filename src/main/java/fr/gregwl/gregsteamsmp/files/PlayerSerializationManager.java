@@ -20,8 +20,8 @@ public class PlayerSerializationManager {
                 .create();
     }
 
-    public String serialize(TeamOwners teamOwners) {
-        return this.gson.toJson(teamOwners);
+    public String serialize(PlayerList playerList) {
+        return this.gson.toJson(playerList);
     }
 
     public PlayerList deserialize(String json) {

@@ -2,7 +2,9 @@ package fr.gregwl.gregsteamsmp.commands.teamsub;
 
 import fr.gregwl.gregsteamsmp.GregsTeamSMP;
 import fr.gregwl.gregsteamsmp.files.FileUtils;
+import fr.gregwl.gregsteamsmp.files.PlayerSerializationManager;
 import fr.gregwl.gregsteamsmp.files.TeamOwnersSerializationManager;
+import fr.gregwl.gregsteamsmp.objects.PlayerList;
 import fr.gregwl.gregsteamsmp.objects.TeamOwners;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
@@ -35,10 +37,15 @@ public class TeamDisband extends fr.gregwl.gregsteamsmp.commands.SubCommand {
     public void perform(Player player, String[] args) {
         if(args.length == 1) {
             final File file1 = new File(saveDir, "teamsowners.json");
+            final File filePlayerList = new File(saveDir, "playerlist.json");
 
             final TeamOwnersSerializationManager teamOwnersSerializationManager = GregsTeamSMP.getInstance().getTeamOwnersSerializationManager();
             final String ownerJsonExport = FileUtils.loadContent(file1);
             final TeamOwners teamOwners = teamOwnersSerializationManager.deserialize(ownerJsonExport);
+
+            final PlayerSerializationManager playerSerializationManager = GregsTeamSMP.getInstance().getPlayerSerializationManager();
+            final String playersJsonExport = FileUtils.loadContent(filePlayerList);
+            final PlayerList playerList = playerSerializationManager.deserialize(playersJsonExport);
 
             if(teamOwners.getTeamsOwners().containsKey(player.getUniqueId())) {
                 String teamName = teamOwners.getTeamsOwners().get(player.getUniqueId());
@@ -46,6 +53,10 @@ public class TeamDisband extends fr.gregwl.gregsteamsmp.commands.SubCommand {
                 teamOwners.getTeamsOwners().remove(player.getUniqueId());
                 final String json1 = teamOwnersSerializationManager.serialize(teamOwners);
                 FileUtils.save(file1, json1);
+
+                playerList.getPlayerList().remove(player.getUniqueId());
+                final String playerJson = playerSerializationManager.serialize(playerList);
+                FileUtils.save(filePlayerList, playerJson);
 
                 final File file = new File(saveDir, teamName + ".json");
                 file.delete();

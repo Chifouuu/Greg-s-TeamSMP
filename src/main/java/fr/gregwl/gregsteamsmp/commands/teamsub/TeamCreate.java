@@ -3,8 +3,10 @@ package fr.gregwl.gregsteamsmp.commands.teamsub;
 import fr.gregwl.gregsteamsmp.GregsTeamSMP;
 import fr.gregwl.gregsteamsmp.commands.SubCommand;
 import fr.gregwl.gregsteamsmp.files.FileUtils;
+import fr.gregwl.gregsteamsmp.files.PlayerSerializationManager;
 import fr.gregwl.gregsteamsmp.files.TeamOwnersSerializationManager;
 import fr.gregwl.gregsteamsmp.files.TeamSerializationManager;
+import fr.gregwl.gregsteamsmp.objects.PlayerList;
 import fr.gregwl.gregsteamsmp.objects.Team;
 import fr.gregwl.gregsteamsmp.objects.TeamOwners;
 import org.apache.maven.model.Profile;
@@ -12,6 +14,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
+import org.checkerframework.checker.units.qual.A;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -48,11 +51,14 @@ public class TeamCreate extends SubCommand {
             final UUID teamOwner = player.getUniqueId();
             final File file = new File(saveDir, teamName + ".json");
             final File file1 = new File(saveDir, "teamsowners.json");
+            final File filePlayerList = new File(saveDir, "playerlist.json");
 
             if(file.exists()) {
                 player.sendMessage(GregsTeamSMP.msgPrefix + "Sorry, this team already exists !");
             } else {
-                Team currentTeam = new Team(teamName, 1, teamOwner, null);
+                ArrayList<UUID> members = new ArrayList<>();
+                members.add(teamOwner);
+                Team currentTeam = new Team(teamName, 1, teamOwner, members);
                 final TeamSerializationManager teamSerializationManager = GregsTeamSMP.getInstance().getTeamSerializationManager();
                 final String json = teamSerializationManager.serialize(currentTeam);
 
@@ -69,6 +75,28 @@ public class TeamCreate extends SubCommand {
                     final String json1 = teamOwnersSerializationManager.serialize(teamOwners);
 
                     FileUtils.save(file1, json1);
+
+                    // Player in team list
+                    if(filePlayerList.exists()) {
+                        final PlayerSerializationManager playerSerializationManager = GregsTeamSMP.getInstance().getPlayerSerializationManager();
+                        final String playerJsonExport = FileUtils.loadContent(filePlayerList);
+                        final PlayerList playerList = playerSerializationManager.deserialize(playerJsonExport);
+
+                        playerList.getPlayerList().put(teamOwner, teamName);
+
+                        final String jsonplayer  = playerSerializationManager.serialize(playerList);
+
+                        FileUtils.save(filePlayerList, jsonplayer);
+                    } else {
+                        HashMap<UUID, String> hashmap = new HashMap<>();
+                        hashmap.put(teamOwner, teamName);
+                        PlayerList playerList = new PlayerList(hashmap);
+
+                        final PlayerSerializationManager playerSerializationManager = GregsTeamSMP.getInstance().getPlayerSerializationManager();
+                        final String jsonplayer = playerSerializationManager.serialize(playerList);
+
+                        FileUtils.save(filePlayerList, jsonplayer);
+                    }
                 } else {
                     HashMap<UUID, String> hashMap = new HashMap<>();
                     hashMap.put(teamOwner, teamName);
@@ -78,6 +106,27 @@ public class TeamCreate extends SubCommand {
                     final String json1 = teamOwnersSerializationManager.serialize(teamOwners);
 
                     FileUtils.save(file1, json1);
+
+                    if(filePlayerList.exists()) {
+                        final PlayerSerializationManager playerSerializationManager = GregsTeamSMP.getInstance().getPlayerSerializationManager();
+                        final String playerJsonExport = FileUtils.loadContent(filePlayerList);
+                        final PlayerList playerList = playerSerializationManager.deserialize(playerJsonExport);
+
+                        playerList.getPlayerList().put(teamOwner, teamName);
+
+                        final String jsonplayer  = playerSerializationManager.serialize(playerList);
+
+                        FileUtils.save(filePlayerList, jsonplayer);
+                    } else {
+                        HashMap<UUID, String> hashmap = new HashMap<>();
+                        hashmap.put(teamOwner, teamName);
+                        PlayerList playerList = new PlayerList(hashmap);
+
+                        final PlayerSerializationManager playerSerializationManager = GregsTeamSMP.getInstance().getPlayerSerializationManager();
+                        final String jsonplayer = playerSerializationManager.serialize(playerList);
+
+                        FileUtils.save(filePlayerList, jsonplayer);
+                    }
 
                 }
 

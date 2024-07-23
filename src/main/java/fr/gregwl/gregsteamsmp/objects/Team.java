@@ -2,15 +2,16 @@ package fr.gregwl.gregsteamsmp.objects;
 
 import org.bukkit.entity.Player;
 
+import java.util.ArrayList;
 import java.util.UUID;
 
 public class Team {
     private String teamName;
     private int nbmembers;
     private UUID owner;
-    private UUID[] members;
+    private ArrayList<UUID> members;
 
-    public Team(String teamName, int nbmembers, UUID owner, UUID[] members) {
+    public Team(String teamName, int nbmembers, UUID owner, ArrayList<UUID> members) {
         this.teamName = teamName;
         this.nbmembers = nbmembers;
         this.owner = owner;
@@ -29,7 +30,7 @@ public class Team {
         return owner;
     }
 
-    public UUID[] getMembers() {
+    public ArrayList<UUID> getMembers() {
         return members;
     }
 }
