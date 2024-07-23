@@ -7,6 +7,9 @@ import fr.gregwl.gregsteamsmp.files.TeamSerializationManager;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import java.util.HashMap;
+import java.util.UUID;
+
 public final class GregsTeamSMP extends JavaPlugin {
 
     private static GregsTeamSMP instance;
@@ -14,9 +17,11 @@ public final class GregsTeamSMP extends JavaPlugin {
     private TeamOwnersSerializationManager teamOwnersSerializationManager;
     private PlayerSerializationManager playerSerializationManager;
     public static String msgPrefix = ("§f[§1§lGreg's§b TeamSMP§f] ");
+    public static HashMap<UUID, String> invitedTeamPlayers = new HashMap<>();
 
     @Override
     public void onEnable() {
+        invitedTeamPlayers.clear();
         instance = this;
         this.teamSerializationManager = new TeamSerializationManager();
         this.teamOwnersSerializationManager = new TeamOwnersSerializationManager();
@@ -27,7 +32,7 @@ public final class GregsTeamSMP extends JavaPlugin {
 
     @Override
     public void onDisable() {
-        // Plugin shutdown logic
+        invitedTeamPlayers.clear();
     }
 
     public static GregsTeamSMP getInstance() {
