@@ -20,6 +20,7 @@ public class TeamCommand implements TabExecutor {
         subCommands.add(new TeamInfo());
         subCommands.add(new TeamInvite());
         subCommands.add(new TeamJoin());
+        subCommands.add(new TeamKick());
 
         //pour rajouter des sous-commande de la commande "team", juste ajouter une ligne comme ci-dessus, puis
         //faire la class

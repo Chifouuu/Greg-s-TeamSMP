@@ -70,7 +70,7 @@ public class TeamJoin extends fr.gregwl.gregsteamsmp.commands.SubCommand {
 
             for(int i = 0; i < members.size(); i++) {
                 Player currentPlayer = Bukkit.getPlayer(members.get(i));
-                currentPlayer.sendMessage(GregsTeamSMP.msgPrefix + "§1§l" + player.getName() + "§f has joined the team.");
+                currentPlayer.sendMessage(GregsTeamSMP.msgPrefix + "§1§l" + player.getName() + "§f joined the team.");
             }
 
 
