@@ -55,12 +55,12 @@ public class TeamInfo extends fr.gregwl.gregsteamsmp.commands.SubCommand {
             final String TeamJsonExport = FileUtils.loadContent(fileTeam);
             final Team team = teamSerializationManager.deserialize(TeamJsonExport);
 
-            String teamOwnerName = Bukkit.getPlayer(team.getOwner()).getName();
+            String teamOwnerName = Bukkit.getOfflinePlayer(team.getOwner()).getName();
             int nbMembres = team.getNbmembers();
             ArrayList<UUID> members = team.getMembers();
             ArrayList<String> membersNames = new ArrayList<>();
             for(int i = 0; i < members.size(); i++) {
-                membersNames.add(Bukkit.getPlayer(members.get(i)).getName());
+                membersNames.add(Bukkit.getOfflinePlayer(members.get(i)).getName());
             }
 
             player.sendMessage("§7§l---------");

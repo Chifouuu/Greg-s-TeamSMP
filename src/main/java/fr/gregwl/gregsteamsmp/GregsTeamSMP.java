@@ -1,12 +1,16 @@
 package fr.gregwl.gregsteamsmp;
 
 import fr.gregwl.gregsteamsmp.commands.TeamCommand;
+import fr.gregwl.gregsteamsmp.files.FileUtils;
 import fr.gregwl.gregsteamsmp.files.PlayerSerializationManager;
 import fr.gregwl.gregsteamsmp.files.TeamOwnersSerializationManager;
 import fr.gregwl.gregsteamsmp.files.TeamSerializationManager;
+import fr.gregwl.gregsteamsmp.objects.PlayerList;
 import org.bukkit.entity.Player;
+import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import java.io.File;
 import java.util.HashMap;
 import java.util.UUID;
 
@@ -26,8 +30,20 @@ public final class GregsTeamSMP extends JavaPlugin {
         this.teamSerializationManager = new TeamSerializationManager();
         this.teamOwnersSerializationManager = new TeamOwnersSerializationManager();
         this.playerSerializationManager = new PlayerSerializationManager();
+        File saveDir = new File(this.getDataFolder(), "/teams/");
 
         getCommand("team").setExecutor(new TeamCommand());
+
+        final File filePlayerList = new File(saveDir, "playerlist.json");
+        if(!filePlayerList.exists()) {
+            HashMap<UUID, String> hashmap = new HashMap<>();
+            PlayerList playerList = new PlayerList(hashmap);
+
+            final PlayerSerializationManager playerSerializationManager = GregsTeamSMP.getInstance().getPlayerSerializationManager();
+            final String jsonplayer = playerSerializationManager.serialize(playerList);
+
+            FileUtils.save(filePlayerList, jsonplayer);
+        }
     }
 
     @Override

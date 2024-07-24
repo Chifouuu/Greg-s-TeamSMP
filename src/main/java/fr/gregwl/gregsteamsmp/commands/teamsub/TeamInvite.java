@@ -58,7 +58,17 @@ public class TeamInvite extends fr.gregwl.gregsteamsmp.commands.SubCommand {
                         player.sendMessage(GregsTeamSMP.msgPrefix + "the player you want to invite is already in a team !");
                     } else {
                         String teamName = teamOwners.getTeamsOwners().get(playerUUID);
-                        GregsTeamSMP.invitedTeamPlayers.put(targetplayerUUID, teamName);
+                        if(GregsTeamSMP.invitedTeamPlayers.containsKey(targetplayerUUID)) {
+                            GregsTeamSMP.invitedTeamPlayers.remove(targetplayerUUID);
+                            GregsTeamSMP.invitedTeamPlayers.put(targetplayerUUID, teamName);
+                            player.sendMessage(GregsTeamSMP.msgPrefix + "§1§l" + Bukkit.getPlayer(targetplayerUUID).getName() + "§f has been invited in your team.");
+                            Bukkit.getPlayer(targetplayerUUID).sendMessage("You have been invited to the§1§l " + teamName + "§f team. Type§1§l /team join§f for join this team.");
+                        } else {
+                            GregsTeamSMP.invitedTeamPlayers.put(targetplayerUUID, teamName);
+                            player.sendMessage(GregsTeamSMP.msgPrefix + "§1§l" + Bukkit.getPlayer(targetplayerUUID).getName() + "§f has been invited in your team.");
+                            Bukkit.getPlayer(targetplayerUUID).sendMessage(GregsTeamSMP.msgPrefix + "You have been invited to the§1§l " + teamName + "§f team. Type§1§l /team join§f for join this team.");
+                        }
+
                     }
                 } else {
                     player.sendMessage(GregsTeamSMP.msgPrefix + "Sorry, you don't have permission to invite players !");
