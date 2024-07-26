@@ -62,6 +62,7 @@ public class TeamJoin extends fr.gregwl.gregsteamsmp.commands.SubCommand {
             final Team team = teamSerializationManager.deserialize(TeamJsonExport);
 
             team.getMembers().add(player.getUniqueId());
+            team.setNbmembers(team.getNbmembers() + 1);
             ArrayList<UUID> members = team.getMembers();
 
             // save file team

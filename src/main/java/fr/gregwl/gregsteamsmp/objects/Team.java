@@ -33,4 +33,8 @@ public class Team {
     public ArrayList<UUID> getMembers() {
         return members;
     }
+
+    public void setNbmembers(int nbmembers) {
+        this.nbmembers = nbmembers;
+    }
 }

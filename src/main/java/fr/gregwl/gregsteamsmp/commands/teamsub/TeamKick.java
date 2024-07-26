@@ -70,6 +70,7 @@ public class TeamKick extends SubCommand {
                         player.sendMessage(GregsTeamSMP.msgPrefix + "Sorry, you can't kick yourself !");
                     } else {
                         team.getMembers().remove(targetplayerUUID);
+                        team.setNbmembers(team.getNbmembers() - 1);
 
                         final String json = teamSerializationManager.serialize(team);
 
