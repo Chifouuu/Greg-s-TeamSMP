@@ -1,4 +1,4 @@
-package fr.gregwl.gregsteamsmp.commands.teamsub;
+package fr.gregwl.gregsteamsmp.commands.teamsub.leave;
 
 import fr.gregwl.gregsteamsmp.GregsTeamSMP;
 import fr.gregwl.gregsteamsmp.commands.SubCommand;
@@ -14,7 +14,6 @@ import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
 
 import java.io.File;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;

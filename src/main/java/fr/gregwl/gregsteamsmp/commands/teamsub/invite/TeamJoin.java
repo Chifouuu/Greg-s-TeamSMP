@@ -1,4 +1,4 @@
-package fr.gregwl.gregsteamsmp.commands.teamsub;
+package fr.gregwl.gregsteamsmp.commands.teamsub.invite;
 
 import fr.gregwl.gregsteamsmp.GregsTeamSMP;
 import fr.gregwl.gregsteamsmp.files.FileUtils;
@@ -7,7 +7,6 @@ import fr.gregwl.gregsteamsmp.files.TeamSerializationManager;
 import fr.gregwl.gregsteamsmp.objects.PlayerList;
 import fr.gregwl.gregsteamsmp.objects.Team;
 import org.bukkit.Bukkit;
-import org.bukkit.GameEvent;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
 

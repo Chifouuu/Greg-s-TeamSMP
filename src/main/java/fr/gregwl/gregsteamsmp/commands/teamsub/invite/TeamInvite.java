@@ -1,4 +1,4 @@
-package fr.gregwl.gregsteamsmp.commands.teamsub;
+package fr.gregwl.gregsteamsmp.commands.teamsub.invite;
 
 import fr.gregwl.gregsteamsmp.GregsTeamSMP;
 import fr.gregwl.gregsteamsmp.files.FileUtils;

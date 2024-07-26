@@ -1,11 +1,11 @@
 package fr.gregwl.gregsteamsmp;
 
+import fr.gregwl.gregsteamsmp.claims.ClaimEventHandler;
 import fr.gregwl.gregsteamsmp.commands.TeamCommand;
-import fr.gregwl.gregsteamsmp.files.FileUtils;
-import fr.gregwl.gregsteamsmp.files.PlayerSerializationManager;
-import fr.gregwl.gregsteamsmp.files.TeamOwnersSerializationManager;
-import fr.gregwl.gregsteamsmp.files.TeamSerializationManager;
+import fr.gregwl.gregsteamsmp.files.*;
+import fr.gregwl.gregsteamsmp.objects.Claim;
 import fr.gregwl.gregsteamsmp.objects.PlayerList;
+import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -20,6 +20,7 @@ public final class GregsTeamSMP extends JavaPlugin {
     private TeamSerializationManager teamSerializationManager;
     private TeamOwnersSerializationManager teamOwnersSerializationManager;
     private PlayerSerializationManager playerSerializationManager;
+    private ClaimSerializationManager claimSerializationManager;
     public static String msgPrefix = ("§f[§1§lGreg's§b TeamSMP§f] ");
     public static HashMap<UUID, String> invitedTeamPlayers = new HashMap<>();
 
@@ -30,9 +31,11 @@ public final class GregsTeamSMP extends JavaPlugin {
         this.teamSerializationManager = new TeamSerializationManager();
         this.teamOwnersSerializationManager = new TeamOwnersSerializationManager();
         this.playerSerializationManager = new PlayerSerializationManager();
+        this.claimSerializationManager = new ClaimSerializationManager();
         File saveDir = new File(this.getDataFolder(), "/teams/");
 
         getCommand("team").setExecutor(new TeamCommand());
+        Bukkit.getPluginManager().registerEvents(new ClaimEventHandler(), this);
 
         final File filePlayerList = new File(saveDir, "playerlist.json");
         if(!filePlayerList.exists()) {
@@ -43,6 +46,17 @@ public final class GregsTeamSMP extends JavaPlugin {
             final String jsonplayer = playerSerializationManager.serialize(playerList);
 
             FileUtils.save(filePlayerList, jsonplayer);
+        }
+
+        final File fileClaimsList = new File(saveDir, "claims.json");
+        if(!fileClaimsList.exists()) {
+            HashMap<String, String> hashMap = new HashMap<>();
+            Claim claim = new Claim(hashMap);
+
+            final ClaimSerializationManager claimSerializationManager = GregsTeamSMP.getInstance().getClaimSerializationManager();
+            final String jsonClaims = claimSerializationManager.serialize(claim);
+
+            FileUtils.save(fileClaimsList, jsonClaims);
         }
     }
 
@@ -65,5 +79,9 @@ public final class GregsTeamSMP extends JavaPlugin {
 
     public PlayerSerializationManager getPlayerSerializationManager() {
         return playerSerializationManager;
+    }
+
+    public ClaimSerializationManager getClaimSerializationManager() {
+        return claimSerializationManager;
     }
 }
