@@ -1,5 +1,5 @@
 name: GregsTeamSMP
-version: '1.0-SNAPSHOT'
+version: '1.0-Release'
 main: fr.gregwl.gregsteamsmp.GregsTeamSMP
 api-version: '1.21'
 commands:

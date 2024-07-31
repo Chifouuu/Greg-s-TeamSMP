@@ -12,9 +12,10 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.File;
 import java.util.HashMap;
+import java.util.Optional;
 import java.util.UUID;
 
-public final class GregsTeamSMP extends JavaPlugin {
+public final class GregsTeamSMP extends JavaPlugin{
 
     private static GregsTeamSMP instance;
     private TeamSerializationManager teamSerializationManager;
@@ -26,13 +27,17 @@ public final class GregsTeamSMP extends JavaPlugin {
 
     @Override
     public void onEnable() {
+
+
         invitedTeamPlayers.clear();
         instance = this;
         this.teamSerializationManager = new TeamSerializationManager();
         this.teamOwnersSerializationManager = new TeamOwnersSerializationManager();
         this.playerSerializationManager = new PlayerSerializationManager();
         this.claimSerializationManager = new ClaimSerializationManager();
-        File saveDir = new File(this.getDataFolder(), "/teams/");
+
+        new File(GregsTeamSMP.getInstance().getDataFolder(), "/teams/").mkdirs();
+        File saveDir = new File(GregsTeamSMP.getInstance().getDataFolder(), "/teams/");
 
         getCommand("team").setExecutor(new TeamCommand());
         Bukkit.getPluginManager().registerEvents(new ClaimEventHandler(), this);
@@ -58,7 +63,11 @@ public final class GregsTeamSMP extends JavaPlugin {
 
             FileUtils.save(fileClaimsList, jsonClaims);
         }
+
+
     }
+
+
 
     @Override
     public void onDisable() {
@@ -84,4 +93,6 @@ public final class GregsTeamSMP extends JavaPlugin {
     public ClaimSerializationManager getClaimSerializationManager() {
         return claimSerializationManager;
     }
+
+
 }
