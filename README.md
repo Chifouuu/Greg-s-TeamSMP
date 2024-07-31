@@ -1,5 +1,5 @@
 <p align="center"> 
-  <img src="https://img.shields.io/badge/Version-0.0.6_dev-blue?style=for-the-badge">
+  <img src="https://img.shields.io/badge/Version-1.0-blue?style=for-the-badge">
   <img src="https://img.shields.io/badge/License-MIT-green?style=for-the-badge">
 </p>
 
