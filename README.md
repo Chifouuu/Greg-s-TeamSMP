@@ -15,4 +15,4 @@ A Spigot(Paper) Team plugin for Minecraft SMP's. Including teams, claims, dynmap
 
 ## 🪐 Download
 SpigotMC: https://www.spigotmc.org/resources/gregs-team-smp.118527/
-Modrith: Under review
+Modrith: https://modrinth.com/plugin/gregs-team-smp
