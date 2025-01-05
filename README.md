@@ -8,7 +8,7 @@
   <img src="https://img.shields.io/badge/Written%20In-Java-orange?style=flat-square">
 </p>
 
-# Greg-s-TeamSMP
+# Greg-s-TeamSMP parched for crack versions by serial
 
 ## 📜 Description
 A Spigot(Paper) Team plugin for Minecraft SMP's. Including teams, claims, dynmap
